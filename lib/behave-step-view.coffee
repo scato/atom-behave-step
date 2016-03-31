@@ -4,7 +4,7 @@ module.exports =
 class BehaveStepView extends View
   @content: ->
     @div class: 'behave-step overlay from-top', =>
-      @div "The BehaveStep package is Alive! It's ALIVE!", class: "message"
+      @div "The BehaveStep package", class: "message"
 
   initialize: (serializeState) ->
     atom.workspaceView.command "behave-step:toggle", => @toggle()

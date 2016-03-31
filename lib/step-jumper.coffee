@@ -8,12 +8,12 @@ module.exports =
         @restOfLine = matchData[2]
 
     stepTypeRegex: ->
-      new RegExp "(Given|When|Then|And)\(.*\)"
+      new RegExp "@(Given|When|Then|And)\(.*\)"
 
     checkMatch: ({filePath, matches}) ->
       for match in matches
         console.log("Searching in #{filePath}")
-        regex = match.matchText.match(/\/([^/]*)/)
+        regex = match.matchText.match(/\(\'([^\']*)/)
         try
           regex = new RegExp(regex[1])
         catch e

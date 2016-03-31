@@ -14,7 +14,7 @@ module.exports =
     stepJumper = new StepJumper(currentLine)
     return unless stepJumper.firstWord
     options =
-      paths: ["**/features/steps/**/*.py"]
+      paths: ["**/steps/**/*.py"]
     atom.workspace.scan stepJumper.stepTypeRegex(), options, (match) ->
       if foundMatch = stepJumper.checkMatch(match)
         [file, line] = foundMatch
