@@ -1,12 +1,12 @@
 {
-  "name": "cucumber-step",
-  "main": "./lib/cucumber-step",
-  "version": "0.2.0",
+  "name": "behave-step",
+  "main": "./lib/behave-step",
+  "version": "0.1.0",
   "description": "Jump to step from feature",
   "activationCommands": {
-    "atom-workspace": "cucumber-step:jump-to-step"
+    "atom-workspace": "behave-step:jump-to-step"
   },
-  "repository": "https://github.com/gaslight/atom-cucumber-step",
+  "repository": "https://github.com/gaslight/atom-behave-step",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
