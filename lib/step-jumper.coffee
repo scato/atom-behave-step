@@ -12,10 +12,10 @@ module.exports =
 
     checkMatch: ({filePath, matches}) ->
       for match in matches
-        console.log("Searching in #{filePath}")
+        console.log("Searching in #{filePath} for '#{@restOfLine}'")
         regex = match.matchText.match(/\(\'([^\']*)/)
         try
-          regex = new RegExp(regex[1])
+          regex = new RegExp(regex[1].replace(/\{[^\}]+\}/, ".+"))
         catch e
           console.log(e)
           continue
