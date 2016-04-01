@@ -11,12 +11,13 @@ module.exports =
       new RegExp "@(Given|When|Then|And)\(.*\)"
 
     checkMatch: ({filePath, matches}) ->
+      console.log("Searching in #{filePath} for '#{@restOfLine}'")
       for match in matches
-        console.log("Searching in #{filePath} for '#{@restOfLine}'")
-        regex = match.matchText.match(/\(\'([^\']*)/)
+        step_descriptor = match.matchText.match(/\(\'([^\']*)/)
         try
-          regex = new RegExp(regex[1].replace(/\{[^\}]+\}/, ".+"))
+          regex = new RegExp(step_descriptor[1].replace(/\{[^\}]+\}/g, ".+"))
         catch e
+          console.log(step_descriptor[1] + " cannot be turned into a RegExp")
           console.log(e)
           continue
         if @restOfLine.match(regex)
