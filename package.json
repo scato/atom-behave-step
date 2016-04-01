@@ -6,7 +6,7 @@
   "activationCommands": {
     "atom-workspace": "behave-step:jump-to-step"
   },
-  "repository": "https://github.com/gaslight/atom-behave-step",
+  "repository": "https://github.com/gdunn/atom-behave-step",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
