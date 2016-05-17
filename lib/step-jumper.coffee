@@ -10,10 +10,19 @@ module.exports =
     stepTypeRegex: ->
       new RegExp "@(Given|When|Then|And)\(.*\)"
 
+    extractStepDescriptor: (@line) ->
+      step_descriptor = @line.match(/\(\'([^\']*)/)
+      if not step_descriptor
+        step_descriptor = @line.match(/\(\"([^\"]*)/)
+      return step_descriptor
+
     checkMatch: ({filePath, matches}) ->
       console.log("Searching in #{filePath} for '#{@restOfLine}'")
       for match in matches
-        step_descriptor = match.matchText.match(/\(\'([^\']*)/)
+        step_descriptor = @extractStepDescriptor(match.matchText)
+        if not step_descriptor
+          continue
+
         try
           regex = new RegExp(step_descriptor[1].replace(/\{[^\}]+\}/g, ".+"))
         catch e

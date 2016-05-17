@@ -51,6 +51,22 @@ describe "jumping", ->
         filePath: "path/to/file"
         matches: [match]
       expect(@stepJumper.checkMatch(scanMatch)).toEqual(undefined)
+    it "should match with double quotes", ->
+      match =
+        matchText: "@Given(\"I have a {thing}\")"
+        range: [[20, 0]]
+      scanMatch =
+        filePath: "path/to/file"
+        matches: [match]
+      expect(@stepJumper.checkMatch(scanMatch)).toEqual(["path/to/file", 20])
+    it "should handle incorrect function header", ->
+      match =
+        matchText: "@Given()"
+        range: [[20, 0]]
+      scanMatch =
+        filePath: "path/to/file"
+        matches: [match]
+      expect(@stepJumper.checkMatch(scanMatch)).toEqual(undefined)
 
   describe "checkMatch no match", ->
     beforeEach ->
