@@ -13,8 +13,13 @@ module.exports =
     currentLine = atom.workspace.getActiveTextEditor().getLastCursor().getCurrentBufferLine()
     stepJumper = new StepJumper(currentLine)
     return unless stepJumper.firstWord
-    options =
-      paths: ["**/steps/**/*.py"]
+    filePath = path.dirname(atom.workspace.getActiveTextEditor()?.getPath())
+    relativePath = path.relative(atom.project.getPaths()[0], filePath)
+    searchPath = path.join(relativePath, "..", "**/steps/*.py")
+
+    console.log("Searching for steps:" + searchPath)
+
+    options = paths: [searchPath]
     atom.workspace.scan stepJumper.stepTypeRegex(), options, (match) ->
       if foundMatch = stepJumper.checkMatch(match)
         [file, line] = foundMatch
