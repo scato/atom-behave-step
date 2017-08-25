@@ -11,9 +11,10 @@ module.exports =
       new RegExp "@(Given|When|Then|And)\(.*\)"
 
     extractStepDescriptor: (@line) ->
-      step_descriptor = @line.match(/\(\'([^\']*)/)
+      step_descriptor = @line.match(/\(\'((?:\\\'|[^\\\'])*)/)
       if not step_descriptor
         step_descriptor = @line.match(/\(\"([^\"]*)/)
+        step_descriptor = @line.match(/\(\"((?:\\\"|[^\\\"])*)/)
       return step_descriptor
 
     checkMatch: ({filePath, matches}) ->
@@ -24,7 +25,7 @@ module.exports =
           continue
 
         try
-          regex = new RegExp(step_descriptor[1].replace(/\{[^\}]+\}/g, ".+"))
+          regex = new RegExp(step_descriptor[1].replace(/\{[^\}]+\}/g, ".+").replace(/\\([\'\"])/g, "$1"))
         catch e
           console.log(step_descriptor[1] + " cannot be turned into a RegExp")
           console.log(e)
